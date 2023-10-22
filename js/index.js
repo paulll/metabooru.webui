@@ -1,5 +1,6 @@
 import CID from 'cids';
 
+const API_HOST = 'http://localhost:2954';
 const $ = document.querySelector.bind(document);
 const hashParams = new URLSearchParams(document.location.hash.slice(1));
 
@@ -31,7 +32,7 @@ const addr2href = (addr) => {
 const loadPage = async (query, from) => {
 	const token = localStorage.getItem('booru.token');
 	if (!localStorage.getItem('booru.me')) {
-		const me = await fetch(`https://booru.paulll.cc/api/me`, {
+		const me = await fetch(`${API_HOST}/me`, {
 			headers: {
 				'Authorization': `Bearer ${token}`
 			}
@@ -46,7 +47,7 @@ const loadPage = async (query, from) => {
 
 
 	const grid = $('#image-grid')
-	const result = await fetch(`https://booru.paulll.cc/api/images?query=${encodeURIComponent(query)}&from=${from}`, {
+	const result = await fetch(`${API_HOST}/images?query=${encodeURIComponent(query)}&from=${from}`, {
 		headers: {
 			'Authorization': `Bearer ${token}`
 		}
@@ -74,7 +75,7 @@ const loadPage = async (query, from) => {
 			if (img.approves.map(x=>x.id).includes(me.id))
 				eControlApprove.style.opacity = 1;
 			eControlApprove.onclick = () => {
-				fetch(`https://booru.paulll.cc/api/images/${img.id}/approve`, {
+				fetch(`${API_HOST}/images/${img.id}/approve`, {
 					method: 'POST',
 					headers: {
 						'Authorization': `Bearer ${token}`

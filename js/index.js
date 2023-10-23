@@ -1,6 +1,6 @@
 import CID from 'cids';
 
-const API_HOST = 'http://localhost:2954';
+const API_HOST = 'https://booru.paulll.cc/api';
 const $ = document.querySelector.bind(document);
 const hashParams = new URLSearchParams(document.location.hash.slice(1));
 
@@ -16,16 +16,17 @@ const shuffle = (array) => {
 const addr2href = (addr) => {
 	const cid = new CID(addr).toV1().toString('base32');
 	const thirdParty = [
-		`https://${cid}.ipfs.dweb.link/`,
-		`https://${cid}.ipfs.cf-ipfs.com/`,
-		`https://${cid}.ipfs.infura-ipfs.io/`,
-		`https://${cid}.ipfs.astyanax.io/`,
+		//`https://${cid}.ipfs.dweb.link/`,
+		//`https://${cid}.ipfs.cf-ipfs.com/`,
+		//`https://${cid}.ipfs.infura-ipfs.io/`,
 		`https://ipfs.io/ipfs/${addr}`,
-		`https://cloudflare-ipfs.com/ipfs/${addr}`
+		//`https://cloudflare-ipfs.com/ipfs/${addr}`
 	];
 	shuffle(thirdParty);
 
-	return `https://ipfs.paulll.cc/ipfs/${addr}`;//thirdParty[0];
+	//return thirdParty[0];
+	//return `https://ipfs.paulll.cc/ipfs/${addr}`;//thirdParty[0];
+	return `https://blob.paulll.cc/booru/${addr}`;
 }
 
 
